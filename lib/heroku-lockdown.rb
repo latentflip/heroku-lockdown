@@ -12,6 +12,7 @@ module Heroku
     class << self
       alias_method :old_run, :run
       def run_catch_protected(*args)
+        puts 'rub_castch_potjec'
         begin
           old_run(*args)
         rescue Heroku::Command::LockedDownMethod => pc
