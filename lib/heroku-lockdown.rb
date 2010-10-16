@@ -27,7 +27,7 @@ module Heroku
         old_initialize(args, heroki)
         @locked_down = {}
         lockdown_commands
-      }
+      end
       
       alias_method :old_send, :send
       def safe_send(method, *args)
