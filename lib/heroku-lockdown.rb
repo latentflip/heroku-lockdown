@@ -49,7 +49,7 @@ module Heroku
 
       private
       def lockdown_commands
-        f = File.open(ENV['HOME']+'/.herokurc', 'r').readlines
+        f = File.open(ENV['HOME']+'/.herokurc', 'r').readlines if File.exists?(ENV['HOME']+'/.herokurc')
         f.each do |line|
           if /^protect/ === line
             pieces = line.split(' ')
