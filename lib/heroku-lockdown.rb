@@ -18,6 +18,7 @@ module Heroku
           error "The command: #{pc.command} has been locked down for app: #{pc.app} in your ~/.herokurc."
         end
       end
+      alias_method :run, :run_catch_protected
     
       def run_internal(command, args, heroku=nil)
         klass, method = parse(command)
