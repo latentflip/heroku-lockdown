@@ -10,6 +10,15 @@ module Heroku
     end
 
     class << self
+      alias_method :old_run, :run
+      def run_catch_protected(*args)
+        begin
+          old_run(*args)
+        rescue ProtectedCommand => pc
+          error "The command: #{pc.command} has been locked down for app: #{pc.app} in your ~/.herokurc."
+        end
+      end
+    
       def run_internal(command, args, heroku=nil)
         klass, method = parse(command)
         runner = klass.new(args, heroku)
