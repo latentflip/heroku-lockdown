@@ -24,7 +24,7 @@ module Heroku
 
       alias_method :old_initialize, :initialize
       def initialize(args, heroku=nil)
-        old_initialize(args, heroki)
+        old_initialize(args, heroku)
         @locked_down = {}
         lockdown_commands
       end
