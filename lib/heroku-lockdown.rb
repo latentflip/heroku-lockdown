@@ -17,6 +17,8 @@ module Heroku
           old_run(*args)
         rescue Heroku::Command::LockedDownMethod => pc
           error "The command: #{pc.command} has been locked down for app: #{pc.app} in your ~/.herokurc."
+        rescue
+          puts 'asdfasdfasd'
         end
       end
       alias_method :run, :run_catch_protected
