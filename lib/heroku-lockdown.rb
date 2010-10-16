@@ -1,7 +1,7 @@
 module Heroku
   module Command
 
-    class ProtectedCommand < RuntimeError
+    class LockedDownMethod < RuntimeError
       attr_accessor :command, :app
       def initialize(app, command)
         @app = app
@@ -14,7 +14,7 @@ module Heroku
       def run_catch_protected(*args)
         begin
           old_run(*args)
-        rescue ProtectedCommand => pc
+        rescue Heroku::Command::LockedDownMethod => pc
           error "The command: #{pc.command} has been locked down for app: #{pc.app} in your ~/.herokurc."
         end
       end
