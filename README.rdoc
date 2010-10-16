@@ -13,5 +13,5 @@
 * Add a line for each command and app you want to protect, like so:
 
     #This will prevent db:reset being run on --app production-app
-    protect db:reset production-app
+    protect production-app db:reset
     
