@@ -50,13 +50,15 @@ module Heroku
       private
       def lockdown_commands
         f = File.open(ENV['HOME']+'/.herokurc', 'r').readlines if File.exists?(ENV['HOME']+'/.herokurc')
-        f.each do |line|
-          if /^protect/ === line
-            pieces = line.split(' ')
-            command = Heroku::Command.parse(pieces[2])
-            @locked_down[pieces[1]] ||= {}
-            @locked_down[pieces[1]][command[0]] ||= []
-            @locked_down[pieces[1]][command[0]] << command[1]
+        unless f.nil?
+          f.each do |line|
+            if /^protect/ === line
+              pieces = line.split(' ')
+              command = Heroku::Command.parse(pieces[2])
+              @locked_down[pieces[1]] ||= {}
+              @locked_down[pieces[1]][command[0]] ||= []
+              @locked_down[pieces[1]][command[0]] << command[1]
+            end
           end
         end
       end
