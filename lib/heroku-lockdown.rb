@@ -24,7 +24,7 @@ module Heroku
         klass, method = parse(command)
         runner = klass.new(args, heroku)
         raise InvalidCommand unless runner.respond_to?(method)
-        raise ProtectedCommand.new(runner.app, command) if runner.respond_to?(:locked_down?) && runner.locked_down?(method)
+        raise LockedDownMethod.new(runner.app, command) if runner.respond_to?(:locked_down?) && runner.locked_down?(method)
         runner.send(method)
       end
     end
