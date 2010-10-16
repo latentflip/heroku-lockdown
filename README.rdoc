@@ -1,7 +1,5 @@
 = Heroku-Lockdown
-Heroku-Lockdown is a plugin for the heroku gem for people using heroku in production.
-
-If you are running more than one heroku server for the same app (maybe myapp-production, and myapp-staging), you might be worried about typing;
+Heroku-Lockdown is a plugin for the heroku gem for people using heroku in production. If you are running more than one heroku server for the same app (maybe myapp-production, and myapp-staging), you might be worried about typing;
 
     heroku db:reset --myapp-production
 
@@ -20,8 +18,8 @@ which would be a disaster. This plugin should help prevent that with a simple co
 
 == Usage
 * Create/edit ~/.herokurc
-* Add a line for each command and app you want to protect, like so:
+* Add a line for each command and app pair you want to prevent, like so:
 
-    #This will prevent db:reset being run on --app production-app
-    protect production-app db:reset
-    
+    #This will prevent db:reset being run on --app myapp-production
+    protect myapp-production db:reset
+  
