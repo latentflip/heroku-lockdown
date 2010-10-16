@@ -29,13 +29,13 @@ module Heroku
         lockdown_commands
       }
       
-      alias :old_send, :send
+      alias_method :old_send, :send
       def safe_send(method, *args)
         if locked_down?(method)
           raise ProtectedCommand.new(app, method)
         end
       end
-      alias :safe_send, :send
+      alias_method :safe_send, :send
 
       def locked_down?(command)
         @locked_down[app] && @locked_down[app][self.class] && @locked_down[app][self.class].include?(command)
