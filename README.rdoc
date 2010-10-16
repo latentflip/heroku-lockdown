@@ -9,18 +9,14 @@ when you meant
 
     heroku db:reset --myapp-staging
 
-which would be a disaster. This plugin should help prevent that
-
-
-== Basics
-* Protect your heroku apps on a command-by-command basis.
-* _Only tested so far on heroku setups where you have to add --app to commands._ (i.e. more than one heroku app for a single git repo)
-* If commands like db:reset autorun I don't know if this will work.
+which would be a disaster. This plugin should help prevent that with a simple config file, ~/.herokurc
 
 == Installation
 * Assuming you have the heroku gem installed:
 
     heroku plugins:install git://github.com/latentflip/heroku-lockdown.git
+
+* _Only tested so far on heroku setups where you have to add --app to commands. (i.e. more than one heroku app for a single git repo)
 
 == Usage
 * Create/edit ~/.herokurc
