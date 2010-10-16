@@ -14,7 +14,6 @@ which would be a disaster. This plugin should help prevent that with a simple co
 
     heroku plugins:install git://github.com/latentflip/heroku-lockdown.git
 
-* _Only tested so far on heroku setups where you have to add --app to commands. (i.e. more than one heroku app for a single git repo)
 
 == Usage
 * Create/edit ~/.herokurc
@@ -22,4 +21,11 @@ which would be a disaster. This plugin should help prevent that with a simple co
 
     #This will prevent db:reset being run on --app myapp-production
     protect myapp-production db:reset
-  
+ 
+== Warning
+* I accept no responsibility for this not actually working :). So test it with some safe commands (perhaps db:pull) first.
+* Only tested so far on heroku setups where you have to add --app to commands. (i.e. more than one heroku app for a single git repo). If commands like:
+
+    heroku db:pull
+
+run without requiring the --app switch this may not work.
