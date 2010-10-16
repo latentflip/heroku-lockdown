@@ -10,25 +10,18 @@ module Heroku
     end
 
     class << self
-      alias_method :old_run, :run
-      def run_catch_protected(*args)
-        puts 'rub_castch_potjec'
-        begin
-          old_run(*args)
-        rescue Heroku::Command::LockedDownMethod => pc
-          error "The command: #{pc.command} has been locked down for app: #{pc.app} in your ~/.herokurc."
-        rescue
-          puts 'asdfasdfasd'
-        end
-      end
-      alias_method :run, :run_catch_protected
-    
       def run_internal(command, args, heroku=nil)
-        klass, method = parse(command)
-        runner = klass.new(args, heroku)
-        raise InvalidCommand unless runner.respond_to?(method)
-        raise LockedDownMethod.new(runner.app, command) if runner.respond_to?(:locked_down?) && runner.locked_down?(method)
-        runner.send(method)
+        begin
+          klass, method = parse(command)
+          runner = klass.new(args, heroku)
+          raise InvalidCommand unless runner.respond_to?(method)
+          raise LockedDownMethod.new(runner.app, command) if runner.respond_to?(:locked_down?) && runner.locked_down?(method)
+          runner.send(method)
+        rescue LockedDownMethod => ld
+          error "The command: #{ld.command} has been locked down for app: #{ld.app} in your ~/.herokurc."
+        rescue Exception => e
+          raise(e)
+        end
       end
     end
 
