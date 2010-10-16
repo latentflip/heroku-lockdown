@@ -1,6 +1,20 @@
-= Heroku Lockdown
+= Heroku-Lockdown
+Heroku-Lockdown is a plugin for the heroku gem for people using heroku in production.
+
+If you are running more than one heroku server for the same app (maybe myapp-production, and myapp-staging), you might be worried about typing;
+
+    heroku db:reset --myapp-production
+
+when you meant
+
+    heroku db:reset --myapp-staging
+
+which would be a disaster. This plugin should help prevent that
+
+
+== Basics
 * Protect your heroku apps on a command-by-command basis.
-* Only tested so far on heroku setups where you have to add --app to commands.
+* _Only tested so far on heroku setups where you have to add --app to commands._ (i.e. more than one heroku app for a single git repo)
 * If commands like db:reset autorun I don't know if this will work.
 
 == Installation
